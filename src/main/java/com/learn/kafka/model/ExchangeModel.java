@@ -1,14 +1,18 @@
 package com.learn.kafka.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.Date;
 import java.util.Map;
 
 @Data
-@Document(indexName = "connect-exchange")
+@Document(indexName = "exchange-live")
 public class ExchangeModel {
 
     @Id
@@ -18,6 +22,8 @@ public class ExchangeModel {
     private String date;
     private Map<String, Double> rates;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    @Field(type = FieldType.Date, format = DateFormat.date_time)
     private Date timestamp;
 
     public String getId() {

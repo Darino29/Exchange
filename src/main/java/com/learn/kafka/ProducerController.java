@@ -22,7 +22,7 @@ public class ProducerController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @PostMapping("/connect-exchange")
+    @PostMapping("/exchange-live")
     public ResponseEntity<String> sendMessage(@RequestParam String content) throws JsonProcessingException {
 
         var data = exchangeService.getExchangeRates(content);
